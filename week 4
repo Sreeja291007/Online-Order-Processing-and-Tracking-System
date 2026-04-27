@@ -1,0 +1,57 @@
+# Stage 4: Modular Functions
+
+orders = []
+order_id = 1
+
+def validate_quantity(q):
+    return q > 0
+
+def calculate_total(q, p):
+    return q * p
+
+def add_order():
+    global order_id
+
+    name = input("Customer: ").title()
+    product = input("Product: ").title()
+
+    q = int(input("Qty: "))
+    while not validate_quantity(q):
+        q = int(input("Enter valid qty: "))
+
+    p = float(input("Price: "))
+    total = calculate_total(q, p)
+
+    order = [order_id, name, product, q, p, total, "Placed"]
+    orders.append(order)
+
+    order_id += 1
+    print("Order added!")
+
+def list_orders():
+    for o in orders:
+        print(o)
+
+def search_order():
+    name = input("Search name: ").lower()
+    for o in orders:
+        if name in o[1].lower():
+            print(o)
+
+def update_status():
+    oid = int(input("Enter order id: "))
+    for o in orders:
+        if o[0] == oid:
+            o[6] = input("New status: ")
+            print("Updated!")
+
+# Menu
+while True:
+    print("\n1 Add 2 List 3 Search 4 Update 5 Exit")
+    ch = input()
+
+    if ch == "1": add_order()
+    elif ch == "2": list_orders()
+    elif ch == "3": search_order()
+    elif ch == "4": update_status()
+    elif ch == "5": break
