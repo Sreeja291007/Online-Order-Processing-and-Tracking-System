@@ -1,0 +1,59 @@
+# Stage 2: Menu-Based Order System
+
+orders = []  # Temporary storage
+
+while True:
+    print("\n===== Order Menu =====")
+    print("1. Place Order")
+    print("2. View Orders")
+    print("3. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        print("\n--- Place New Order ---")
+
+        customer_name = input("Enter customer name: ")
+        product_name = input("Enter product name: ")
+
+        quantity = int(input("Enter quantity: "))
+        while quantity <= 0:
+            print("Quantity must be greater than 0!")
+            quantity = int(input("Enter quantity again: "))
+
+        price_per_unit = float(input("Enter price per unit: "))
+        total_amount = quantity * price_per_unit
+
+        # Store order as dictionary
+        order = {
+            "customer": customer_name,
+            "product": product_name,
+            "quantity": quantity,
+            "price": price_per_unit,
+            "total": total_amount
+        }
+
+        orders.append(order)
+        print("✅ Order placed successfully!")
+
+    elif choice == "2":
+        print("\n===== All Orders =====")
+
+        if len(orders) == 0:
+            print("No orders found.")
+        else:
+            for i, order in enumerate(orders, start=1):
+                print(f"\nOrder {i}")
+                print(f"Customer : {order['customer']}")
+                print(f"Product  : {order['product']}")
+                print(f"Quantity : {order['quantity']}")
+                print(f"Price    : ₹{order['price']:.2f}")
+                print(f"Total    : ₹{order['total']:.2f}")
+                print("----------------------")
+
+    elif choice == "3":
+        print("Exiting system... Thank you!")
+        break
+
+    else:
+        print("Invalid choice! Please try again.")
