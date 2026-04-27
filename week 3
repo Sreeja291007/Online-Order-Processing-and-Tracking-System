@@ -1,0 +1,61 @@
+# Stage 3: List-Based Order Management
+
+orders = []
+order_id_counter = 1
+
+def clean_text(text):
+    return text.strip().title()
+
+def add_order():
+    global order_id_counter
+
+    customer = clean_text(input("Enter customer name: "))
+    product = clean_text(input("Enter product name: "))
+
+    quantity = int(input("Enter quantity: "))
+    while quantity <= 0:
+        print("Invalid quantity!")
+        quantity = int(input("Enter quantity again: "))
+
+    price = float(input("Enter price: "))
+    total = quantity * price
+
+    order = [order_id_counter, customer, product, quantity, price, total]
+    orders.append(order)
+
+    order_id_counter += 1
+    print("✅ Order added!")
+
+def list_orders():
+    print("\n===== All Orders =====")
+    print("ID | Customer | Product | Qty | Price | Total")
+    print("-" * 50)
+
+    for o in orders:
+        print(f"{o[0]} | {o[1]} | {o[2]} | {o[3]} | {o[4]} | {o[5]}")
+
+def search_order():
+    keyword = input("Search by customer name: ").lower()
+
+    found = False
+    for o in orders:
+        if keyword in o[1].lower():
+            print(o)
+            found = True
+
+    if not found:
+        print("No matching orders.")
+
+# Menu
+while True:
+    print("\n1.Add 2.List 3.Search 4.Exit")
+    ch = input("Choice: ")
+
+    if ch == "1":
+        add_order()
+    elif ch == "2":
+        list_orders()
+    elif ch == "3":
+        search_order()
+    elif ch == "4":
+        break
