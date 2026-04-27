@@ -1,0 +1,29 @@
+# Stage 1: Basic Order Capture
+
+print("===== Simple Order System =====")
+
+# Taking inputs
+customer_name = input("Enter customer name: ")
+product_name = input("Enter product name: ")
+
+# Quantity validation
+quantity = int(input("Enter quantity: "))
+while quantity <= 0:
+    print("Quantity must be greater than 0!")
+    quantity = int(input("Enter quantity again: "))
+
+# Price input
+price_per_unit = float(input("Enter price per unit: "))
+
+# Calculation
+total_amount = quantity * price_per_unit
+
+# Output (formatted receipt)
+print("\n===== Order Receipt =====")
+print(f"Customer Name : {customer_name}")
+print(f"Product Name  : {product_name}")
+print(f"Quantity      : {quantity}")
+print(f"Price/Unit    : ₹{price_per_unit:.2f}")
+print("----------------------------")
+print(f"Total Amount  : ₹{total_amount:.2f}")
+print("============================")
