@@ -1,0 +1,50 @@
+# Stage 5: Dictionary-Based Orders
+
+orders = []
+categories = set()
+order_id = 101
+
+def add_order():
+    global order_id
+
+    customer = input("Customer: ").title()
+    product = input("Product: ").title()
+    category = input("Category: ").title()
+
+    quantity = int(input("Qty: "))
+    price = float(input("Price: "))
+
+    order = {
+        "order_id": order_id,
+        "customer": customer,
+        "product": product,
+        "category": category,
+        "quantity": quantity,
+        "price": price,
+        "status": "Placed"
+    }
+
+    categories.add(category)
+    orders.append(order)
+    order_id += 1
+
+def show_orders():
+    for o in orders:
+        total = o["quantity"] * o["price"]
+
+        # tuple summary
+        summary = (o["order_id"], o["customer"], total)
+        print(summary)
+
+def show_categories():
+    print("Unique Categories:", categories)
+
+# Menu
+while True:
+    print("\n1 Add 2 Show 3 Categories 4 Exit")
+    ch = input()
+
+    if ch == "1": add_order()
+    elif ch == "2": show_orders()
+    elif ch == "3": show_categories()
+    elif ch == "4": break
